@@ -1,0 +1,162 @@
+/*Name: Prakhar Bajpayee
+ * Class: CSE 360
+ * Assignment Number: 1
+ * Description: Basic array operations to declare, add, remove, keep count, search, and return values.
+ * */
+
+public class SimpleList {
+	private int[] list;  //declaring array
+	private int count;
+	public int size;
+	public int[] temp;
+	
+	
+	public SimpleList() { // as per method requirement
+		size = 10;
+		list = new int[size];  // allocating required memory to array
+		count = 0;
+	}
+
+	public void add(int number) {// as per method requirement
+		if(count == 0)
+		{
+			list[0] = number;
+			count++;
+		}
+		
+		else if (count < 10)	
+		{
+			for(int i = count-1; i >= 0; i--)
+			{
+				list[i+1]=list[i];
+			}
+			list[0] = number;
+			count++;
+		}
+		else
+		{
+			size = (int) Math.ceil(size*1.5);
+			temp = new int[size];
+			for(int i  = 0; i < list.length; i++)
+			{
+				temp[i] = list [i];
+			}
+			list = new int[size];
+			for(int i = 0; i < size; i++)
+			{
+				list[i+1] = temp[i];
+			}
+			list[0] = number;
+			
+			count++;
+			
+			
+			
+			
+//			for(int i = 8; i >= 0; i--) {
+//				list[i+1]=list[i];
+//			}
+//			list[0] = number;
+//			count = 10;
+		}
+	}
+	
+	public int count() { // as per method requirement
+		return count; //returns current count.
+	}
+	
+	public String toString() { // as per method requirement
+		String toReturn = "";
+		for(int i = 0; i < count; i++)
+		{
+			toReturn += " " + list[i];
+		}	
+		return toReturn.trim(); //to eliminate unnecessary white spaces
+	}
+	
+	public int search(int find) // as per method requirement
+	{ //basic search traverses the entire array and returns index if found, otherwise returns -1.
+		int i = 0;
+		int j = -1;
+		for (i = 0; i < count; i++)
+		{
+			if(list[i] == find)
+			{
+				j = i;
+			}
+		}
+		
+		return j;
+	}
+	
+	public void remove(int remove) // as per method requirement
+	{
+		int i = search(remove); // to get the element index of the element to be removed.
+		
+		if(i != -1 && i >= 0 && i < 10) // when and only when the element is present the loop is executed.
+		{
+			for(int k = i; k < count-1; k++) //we go one less that count to avoid arrayIndexOutOfBounds error
+			{
+				list[k] = list[k+1];
+			}
+			count--;
+		}
+		
+		
+		size = (int) Math.ceil(size*0.75);
+		temp = new int[size];
+		for( int k = 0; k < size; k++)
+		{
+			temp[k] = list[k];
+		}
+		list = new int[size];
+		for(int k = 0; k < size; k++)
+		{
+			list[k] = temp[k];
+		}
+		
+		count--;
+		
+		if(count < 0)
+			count = 0;			
+	}
+	
+	public void append(int number)
+	{
+		if(count == size)
+		{
+			size = (int) Math.ceil(size*1.5);
+			temp = new int[size];
+			for(int i  = 0; i < list.length; i++)
+			{
+				temp[i] = list [i];
+			}
+			list = new int[size];
+			for(int i = 0; i<size; i++)
+			{
+				list[i] = temp[i];
+			}
+		}
+		count++;
+		list[count] = number;
+		
+	}
+
+	public int first()
+	{
+		if(count == 0)
+			return -1;
+		
+		else 
+			return list[0];
+	}
+	
+	public int last()
+	{
+		if(count == 0)
+			return -1;
+		
+		else 
+			return list[count];
+	}
+}
