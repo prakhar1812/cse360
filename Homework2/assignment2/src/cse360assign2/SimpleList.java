@@ -1,7 +1,9 @@
 package cse360assign2;
 
-/*Name: Prakhar Bajpayee
+/**
+ * @author Prakhar Bajpayee
  * Class: CSE 360
+ * Class ID: 215
  * Assignment Number: 2
  * Description: Basic array operations to declare, add (increase size dynamically), remove (decrease size dynamically), keep count, search, append, first and last element of the array and return values.
  * */
